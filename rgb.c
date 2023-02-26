@@ -48,9 +48,9 @@ static const char gaming_leds[] = {
     // 26, 21,  20,  15,  12,  7,
                        /*14,*/ 13,/*6,*/
     // 51,  50,  45,  44,  37,  36,
-    // 52,  49,  46,  43,  38,  35,
-    // 53,  48,  47,  42,  39,  34,
-                       /*41,*/ 40,/*33*/
+    /* 52,  49,  46,  43,*/  38,  35,
+    53, // 48,  47,  42,  39,  34,
+                       /*41,*/ 40, 33
 };
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -69,7 +69,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
             break;
         case _GAMING:
-            for (uint8_t i = 0; i < 14; i++) {
+            for (uint8_t i = 0; i < 18; i++) {
                 rgb_matrix_set_color(gaming_leds[i], RGB_RED);
             }
             break;
