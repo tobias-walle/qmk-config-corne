@@ -21,18 +21,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keycodes.h"
 
 enum custom_keycodes {
-  TMUX_SELECTOR = SAFE_RANGE,
-  TMUX_TERM_VERTICAL,
-  TMUX_TERM_HORIZONTAL
+  TMUX_SEL = SAFE_RANGE, // select tmux session
+  TMUX_P_V, // create vertial pane
+  TMUX_P_H, // create horizontal pane
+  TMUX_P_X, // close pane
+  TMUX_W_L, // jump to last window
+  TMUX_W_C // create window 
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, RSFT_T(KC_QUOT),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LSFT_T(KC_CAPS),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT
                                       //`--------------------------'  `--------------------------'
@@ -43,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, TMUX_TERM_HORIZONTAL, XXXXXXX, TMUX_SELECTOR, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+   KC_LCTL, TMUX_W_L, TMUX_P_H, XXXXXXX, TMUX_SEL, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, TMUX_TERM_VERTICAL, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_LSFT, XXXXXXX, TMUX_P_X, TMUX_W_C, TMUX_P_V, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI, _______,  KC_SPC,     KC_ENT,   GAMING, KC_RALT
                                       //`--------------------------'  `--------------------------'
@@ -78,17 +81,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_TERM_VERTICAL:  
+    case TMUX_P_V:  
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "v");
       }
       return false;
-    case TMUX_TERM_HORIZONTAL:  // Types ../ to go up a directory on the shell.
+    case TMUX_P_H:  
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "s");
       }
       return false;
-    case TMUX_SELECTOR:  // Types ../ to go up a directory on the shell.
+    case TMUX_P_X:  
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "x");
+      }
+      return false;
+    case TMUX_W_C: 
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "c");
+      }
+      return false;
+    case TMUX_W_L:  
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a") SS_DELAY(10) SS_LCTL("a"));
+      }
+      return false;
+    case TMUX_SEL: 
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "f");
       }

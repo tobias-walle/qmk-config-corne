@@ -22,8 +22,8 @@
 
 static const char lower_leds[] = {
     24,  23,  18,  17,  10,   9,
-    25, // 22,  19,  16,  11,   8,
-    26, // 21,  20,  15,  12,   7,
+    25,  22,  19, /*16,*/ 11, // 8,
+    26,/*21,*/ 20,  15,  12,  // 7,
                          14,  13,  6,
     51,  50,  45,  44,  37,  36,
     52,  49,  46,  43, // 38,  35,
@@ -45,14 +45,12 @@ static const char raise_leds[] = {
 static const char gaming_leds[] = {
     24,  23,  18,  17,  10,   9,
     25,  22,  19,  16,  11,   8,
-    // 26, 21,  20,  15,  12,   7,
-                         // 14, 13,
-                                     6,
+    // 26, 21,  20,  15,  12,  7,
+                       /*14,*/ 13,/*6,*/
     // 51,  50,  45,  44,  37,  36,
     // 52,  49,  46,  43,  38,  35,
     // 53,  48,  47,  42,  39,  34,
-                        // 41,  40,  
-                                    33 
+                       /*41,*/ 40,/*33*/
 };
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -61,7 +59,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color_all(RGB_WORKING_WHITE);
             break;
         case _LOWER:
-            for (uint8_t i = 0; i < 24; i++) {
+            for (uint8_t i = 0; i < 30; i++) {
                 rgb_matrix_set_color(lower_leds[i], RGB_GREEN);
             }
             break;
