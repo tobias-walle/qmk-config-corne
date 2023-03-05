@@ -42,7 +42,7 @@ static const char raise_leds[] = {
                         41,  40,  33 
 };
 
-static const char gaming_leds[] = {
+static const char meta_leds[] = {
     24,  23,  18,  17,  10,   9,
     25,  22,  19,  16,  11,   8,
     // 26, 21,  20,  15,  12,  7,
@@ -68,9 +68,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(raise_leds[i], RGB_BLUE);
             }
             break;
-        case _GAMING:
+        case _META:
             for (uint8_t i = 0; i < 18; i++) {
-                rgb_matrix_set_color(gaming_leds[i], RGB_RED);
+                rgb_matrix_set_color(meta_leds[i], RGB_RED);
             }
             break;
     } return false;

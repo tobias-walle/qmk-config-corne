@@ -46,11 +46,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-   KC_LCTL, TMUX_W_L, TMUX_P_H, XXXXXXX, TMUX_SEL, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-  KC_LSFT, XXXXXXX, TMUX_P_X, TMUX_W_C, TMUX_P_V, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   GAMING, KC_RALT
+                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   META, KC_RALT
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -62,19 +62,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,  GAMING,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          KC_LGUI,  META,  KC_SPC,     KC_ENT, _______, KC_RALT
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [_GAMING] = LAYOUT_split_3x6_3(
+  [_META] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //|--------+-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,
+      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, GAMING, XXXXXXX,     KC_ENT,  GAMING, XXXXXXX 
+                                          KC_LGUI, META,  KC_SPC,     KC_ENT, META, KC_RALT
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -275,12 +275,12 @@ void render_layer_state(void) {
         0x20, 0x9a, 0x9b, 0x9c, 0x20,
         0x20, 0xba, 0xbb, 0xbc, 0x20,
         0x20, 0xda, 0xdb, 0xdc, 0x20, 0};
-    static const char PROGMEM gaming_layer[] = {
+    static const char PROGMEM meta_layer[] = {
         0x20, 0x9d, 0x9e, 0x9f, 0x20,
         0x20, 0xbd, 0xbe, 0xbf, 0x20,
         0x20, 0xdd, 0xde, 0xdf, 0x20, 0};
-    if(layer_state_is(_GAMING)) {
-        oled_write_P(gaming_layer, false);
+    if(layer_state_is(_META)) {
+        oled_write_P(meta_layer, false);
     } else if(layer_state_is(_LOWER)) {
         oled_write_P(lower_layer, false);
     } else if(layer_state_is(_RAISE)) {
