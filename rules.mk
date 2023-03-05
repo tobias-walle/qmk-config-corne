@@ -1,4 +1,4 @@
-MOUSEKEY_ENABLE   = yes    # Mouse keys
+MOUSEKEY_ENABLE   = no    # Mouse keys
 RGBLIGHT_ENABLE   = no
 RGB_MATRIX_ENABLE = yes
 NKRO_ENABLE        = yes

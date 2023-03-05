@@ -18,60 +18,22 @@
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
-#define RGB_WORKING_WHITE  30, 30, 30
-
-static const char lower_leds[] = {
-    24,  23,  18,  17,  10,   9,
-    25,  22,  19, /*16,*/ 11, // 8,
-    26,/*21,*/ 20,  15,  12,  // 7,
-                         14,  13,  6,
-    51,  50,  45,  44,  37,  36,
-    52,  49,  46,  43, // 38,  35,
-    // 53,  48,  47,  42,  39,  34,
-                        41,  40,  33 
-};
-
-static const char raise_leds[] = {
-    24,  23,  18,  17,  10,   9,
-    25, // 22,  19,  16,  11,   8,
-    26, // 21,  20,  15,  12,   7,
-                         14,  13,  6,
-    51,  50,  45,  44,  37,  36,
-    52,  49,  46,  43,  38,  35,
-    53,  48,  47,  42,  39,  34,
-                        41,  40,  33 
-};
-
-static const char meta_leds[] = {
-    24,  23,  18,  17,  10,   9,
-    25,  22,  19,  16,  11,   8,
-    // 26, 21,  20,  15,  12,  7,
-                       /*14,*/ 13,/*6,*/
-    // 51,  50,  45,  44,  37,  36,
-    /* 52,  49,  46,  43,*/  38,  35,
-    53, // 48,  47,  42,  39,  34,
-                       /*41,*/ 40, 33
-};
-
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    int saturation = 150;
+    int brightness = 50;
     switch(get_highest_layer(layer_state|default_layer_state)) {
         case _BASE:
-            rgb_matrix_set_color_all(RGB_WORKING_WHITE);
+            rgb_matrix_sethsv(100, saturation, brightness);
             break;
         case _LOWER:
-            for (uint8_t i = 0; i < 30; i++) {
-                rgb_matrix_set_color(lower_leds[i], RGB_GREEN);
-            }
+            rgb_matrix_sethsv(50, saturation, brightness);
             break;
         case _RAISE:
-            for (uint8_t i = 0; i < 32; i++) {
-                rgb_matrix_set_color(raise_leds[i], RGB_BLUE);
-            }
+            rgb_matrix_sethsv(150, saturation, brightness);
             break;
         case _META:
-            for (uint8_t i = 0; i < 18; i++) {
-                rgb_matrix_set_color(meta_leds[i], RGB_RED);
-            }
+            rgb_matrix_sethsv( 0, 0, 10);
             break;
-    } return false;
+    };
+    return false;
 }
