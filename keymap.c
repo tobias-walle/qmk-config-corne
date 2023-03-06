@@ -22,11 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum custom_keycodes {
   TMUX_SEL = SAFE_RANGE, // select tmux session
-  TMUX_P_V, // create vertial pane
-  TMUX_P_H, // create horizontal pane
-  TMUX_P_X, // close pane
-  TMUX_W_L, // jump to last window
-  TMUX_W_C // create window 
+  TMUX_P, // Tmux prefix
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
@@ -44,9 +40,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+       KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+      KC_LCTL,  TMUX_P, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -56,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_LPRN, KC_RPRN, KC_ASTR, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -81,34 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_P_V:  
+    case TMUX_P:  
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "v");
-      }
-      return false;
-    case TMUX_P_H:  
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "s");
-      }
-      return false;
-    case TMUX_P_X:  
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "x");
-      }
-      return false;
-    case TMUX_W_C: 
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "c");
-      }
-      return false;
-    case TMUX_W_L:  
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) SS_LCTL("a"));
-      }
-      return false;
-    case TMUX_SEL: 
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "f");
+        SEND_STRING(SS_LCTL("a"));
       }
       return false;
   }
