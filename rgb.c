@@ -18,6 +18,12 @@
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
+void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
+  HSV hsv = {h, s, v};
+  RGB rgb = hsv_to_rgb(hsv);
+  rgb_matrix_set_color(led, rgb.r, rgb.g, rgb.b);
+}
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     int saturation = 150;
     int brightness = 50;
@@ -35,5 +41,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_sethsv( 0, 0, 10);
             break;
     };
+    /* rgb_matrix_sethsv_at(5, 0, saturation, 255); */
     return false;
 }
