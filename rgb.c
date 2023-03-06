@@ -1,20 +1,3 @@
-/* Copyright 2022 @toinux
-  *
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 2 of the License, or
-  * (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
-
-
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
@@ -24,21 +7,43 @@ void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
   rgb_matrix_set_color(led, rgb.r, rgb.g, rgb.b);
 }
 
+void set_board_colors_side(uint8_t offset, uint8_t h, uint8_t s, uint8_t v) {
+  for(int i = 0; i < 24; i++) {
+    uint8_t led = i + offset + 6;
+    if (led > 0) {
+      uint8_t x = i / 4 * 10;
+      rgb_matrix_sethsv_at(led, h + x, s, v);
+    }
+  }
+  // Backlight
+  for(int i = 0; i < 6; i++) {
+    uint8_t led = i + offset;
+      rgb_matrix_sethsv_at(led, h - 100, 255, 180);
+  }
+}
+
+void set_board_colors(uint8_t h, uint8_t s, uint8_t v) {
+  // Left
+  set_board_colors_side(0, h, s, v);
+  // Right
+  set_board_colors_side(27, h, s, v);
+}
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    int saturation = 150;
+    int saturation = 180;
     int brightness = 50;
     switch(get_highest_layer(layer_state|default_layer_state)) {
         case _BASE:
-            rgb_matrix_sethsv(100, saturation, brightness);
+            set_board_colors(100, saturation, brightness);
             break;
         case _LOWER:
-            rgb_matrix_sethsv(50, saturation, brightness);
+            set_board_colors(50, saturation, brightness);
             break;
         case _RAISE:
-            rgb_matrix_sethsv(150, saturation, brightness);
+            set_board_colors(150, saturation, brightness);
             break;
         case _META:
-            rgb_matrix_sethsv( 0, 0, 10);
+            rgb_matrix_sethsv(0, 0, 10);
             break;
     };
     /* rgb_matrix_sethsv_at(5, 0, saturation, 255); */
