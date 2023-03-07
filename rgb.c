@@ -23,7 +23,7 @@ void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
   // Backglow
   for(int i = 0; i < 6; i++) {
     uint8_t led = i + offset;
-      rgb_matrix_sethsv_at(led, hue_backglow, 255, brightness + 120);
+    rgb_matrix_sethsv_at(led, hue_backglow, 255, brightness + 120);
   }
 }
 
