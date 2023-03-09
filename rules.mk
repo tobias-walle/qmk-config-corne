@@ -7,5 +7,6 @@ OLED_DRIVER        = SSD1306
 LTO_ENABLE         = yes
 BOOTLOADER        = atmel-dfu
 SPLIT_KEYBOARD    = yes
+COMBO_ENABLE = yes
 SRC += ./rgb.c
 

@@ -23,17 +23,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
   TMUX_SEL = SAFE_RANGE, // select tmux session
   TMUX_P, // Tmux prefix
+  TMUX_P_N, // Tmux Switch
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-LCTL_T(KC_ESC), LALT_T(KC_A), KC_S, KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, RSFT_T(KC_QUOT),
+LCTL_T(KC_ESC), LALT_T(KC_A), LGUI_T(KC_S), KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K, KC_L, RGUI_T(KC_SCLN), RCTL_T(KC_QUOT),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RGUI,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT
+              LCTL_T(KC_ESC),  LT(_LOWER, KC_TAB), LSFT_T(KC_SPC),     RSFT_T(KC_ENT), LT(_RAISE, KC_BSPC), KC_RCTL
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -44,10 +45,10 @@ LCTL_T(KC_ESC), LALT_T(KC_A), KC_S, KC_D,    KC_F,    KC_G,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,  TMUX_P, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      TMUX_P_N, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   META, KC_RALT
-                                      //`--------------------------'  `--------------------------'
+                                 LCTL_T(KC_ESC), _______,  KC_SPC,     KC_ENT, LT(_META, KC_BSPC), KC_RCTL
+                                    //`--------------------------'  `--------------------------'
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
@@ -58,7 +59,7 @@ LCTL_T(KC_ESC), LALT_T(KC_A), KC_S, KC_D,    KC_F,    KC_G,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,  META,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                 LCTL_T(KC_ESC), LT(_META, KC_BSPC),  KC_SPC,     KC_ENT, _______, KC_RCTL
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -77,14 +78,42 @@ LCTL_T(KC_ESC), LALT_T(KC_A), KC_S, KC_D,    KC_F,    KC_G,                     
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_P:  
+    case TMUX_P: {
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a"));
       }
       return false;
+    }
+    case TMUX_P_N: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("an") );
+      }
+      return false;
+    }
   }
   return true;
 }
+
+const uint16_t PROGMEM combo_1[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM combo_2[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_3[] = {KC_Y, KC_U, COMBO_END};
+const uint16_t PROGMEM combo_4[] = {KC_F, KC_G, COMBO_END};
+const uint16_t PROGMEM combo_5[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_6[] = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM combo_7[] = {KC_N, KC_M, COMBO_END};
+const uint16_t PROGMEM combo_8[] = {KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_9[] = {KC_U, KC_I, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(combo_1, KC_ESC),
+    COMBO(combo_2, KC_LBRC),
+    COMBO(combo_3, KC_RBRC),
+    COMBO(combo_4, KC_LPRN),
+    COMBO(combo_5, KC_RPRN),
+    COMBO(combo_6, KC_LCBR),
+    COMBO(combo_7, KC_RCBR),
+    COMBO(combo_8, KC_LT),
+    COMBO(combo_9, KC_GT),
+};
 
 void suspend_power_down_user(void) {
     rgb_matrix_set_suspend_state(true);
