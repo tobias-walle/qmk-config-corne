@@ -21,57 +21,57 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keycodes.h"
 
 enum custom_keycodes {
-  TMUX_SEL = SAFE_RANGE, // select tmux session
-  TMUX_P, // Tmux prefix
-  TMUX_P_N, // Tmux Switch
+  TMUX_P = SAFE_RANGE, // Tmux prefix
+  TMUX_P_N, // Tmux select session
+  CTL_U,
+  CTL_D,
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+       XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-LCTL_T(KC_ESC), LALT_T(KC_A), LGUI_T(KC_S), KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K, KC_L, RGUI_T(KC_SCLN), RCTL_T(KC_QUOT),
+XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                      KC_H,  KC_J, KC_K, KC_L, RALT_T(KC_QUOT), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RGUI,
+      XXXXXXX, KC_Z, LSG_T(KC_X), KC_C,    KC_V,    KC_B,                        KC_N, KC_M, RSG_T(KC_COMM), KC_DOT, KC_QUES, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-              LCTL_T(KC_ESC),  LT(_LOWER, KC_TAB), LSFT_T(KC_SPC),     RSFT_T(KC_ENT), LT(_RAISE, KC_BSPC), KC_RCTL
+              LGUI_T(KC_ESC),  LT(_RAISE, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), KC_DEL
                                       //`--------------------------'  `--------------------------'
 
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-         KC_0,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,  TMUX_P, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      TMUX_P_N, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,    KC_4,    KC_3,    KC_2,    KC_1,    KC_0,                         KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+_______,LALT_T(KC_BSLS),LGUI_T(KC_MINS), LCTL_T(KC_EQL), KC_SCLN, KC_PERC,    KC_DLR, KC_PAST, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+      _______, KC_TILD, KC_UNDS, KC_PLUS, KC_COLN,   KC_AT,                   KC_HASH, KC_AMPR, KC_CIRC, KC_SLSH, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                 LCTL_T(KC_ESC), _______,  KC_SPC,     KC_ENT, LT(_META, KC_BSPC), KC_RCTL
+                                        _______, LT(_META, KC_TAB),   _______,   _______, _______, _______ 
                                     //`--------------------------'  `--------------------------'
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_LPRN, KC_RPRN, KC_ASTR, KC_DEL,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
+  //,-----------o----------------------------------------.                    ,-----------------------------------------------------.
+      _______,   KC_F5,   KC_F4, KC_F3,   KC_F2,   KC_F1,                     KC_F6,     KC_F7,    KC_F8,   KC_F9, KC_F10, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+      _______, _______, _______, LCTL_T(CTL_U), KC_PGUP, KC_HOME,          KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, RALT_T(KC_F11), _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+      _______, _______, _______, CTL_D, KC_PGDN, KC_END,                      _______, _______, _______, _______, KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                 LCTL_T(KC_ESC), LT(_META, KC_BSPC),  KC_SPC,     KC_ENT, _______, KC_RCTL
+                                        _______,  _______, _______,    _______, LT(_META, KC_BSPC), _______ 
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_META] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______, XXXXXXX, XXXXXXX, KC_MNXT, KC_VOLU, XXXXXXX,                      XXXXXXX, RGB_VAI, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+      _______, XXXXXXX, XXXXXXX, KC_MPLY, KC_MUTE, XXXXXXX,                      XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
+      _______, XXXXXXX, XXXXXXX, KC_MPRV, KC_VOLD, XXXXXXX,                      XXXXXXX, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, META,  KC_SPC,     KC_ENT, META, KC_RALT
+                                        _______, _______,   _______,   _______, _______, _______ 
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -87,6 +87,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case TMUX_P_N: {
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("an") );
+      }
+      return false;
+    }
+    case CTL_U: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("u") );
+      }
+      return false;
+    }
+    case CTL_D: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("d") );
       }
       return false;
     }
