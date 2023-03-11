@@ -34,7 +34,7 @@ XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                  
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_Z, LSG_T(KC_X), KC_C,    KC_V,    KC_B,                        KC_N, KC_M, KC_COMM, RSG_T(KC_DOT), KC_QUES, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-              LGUI_T(KC_ESC),  LT(_RAISE, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), KC_DEL
+              LGUI_T(KC_ESC),  LT(_RAISE, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), RCTL_T(KC_DEL)
                                       //`--------------------------'  `--------------------------'
 
   ),
