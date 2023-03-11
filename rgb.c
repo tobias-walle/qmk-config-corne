@@ -8,7 +8,7 @@ void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
-  int brightness = 50;
+  int brightness = 80;
 
   // Keys
   int saturation = 180;
