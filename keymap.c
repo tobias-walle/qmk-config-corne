@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
   TMUX_P = SAFE_RANGE, // Tmux prefix
   TMUX_P_N, // Tmux select session
+  TMUX_NXT, // Tmux next window
+  TMUX_PRV, // Tmux previous window
   CTL_U,
   CTL_D,
 };
@@ -43,9 +45,9 @@ XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                  
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_0,    KC_1,    KC_2,    KC_3,    KC_4,                         KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-_______,LALT_T(KC_BSLS),LGUI_T(KC_MINS), LCTL_T(KC_SCLN), KC_EQL, KC_PERC,    KC_DLR, KC_PAST, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
+_______,LALT_T(KC_SLSH),LGUI_T(KC_MINS), LCTL_T(KC_SCLN), KC_EQL, KC_PERC,    KC_DLR, KC_PAST, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, KC_TILD, KC_UNDS, KC_COLN, KC_PLUS,   KC_AT,                   KC_HASH, KC_AMPR, KC_CIRC, RSG_T(KC_SLSH), TMUX_P, _______,
+      _______, KC_TILD, KC_UNDS, KC_COLN, KC_PLUS,   KC_AT,                   KC_HASH, KC_AMPR, KC_CIRC, RSG_T(KC_BSLS), TMUX_P, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                         _______, LT(_META, KC_TAB),   _______,   _______, _______, _______ 
                                     //`--------------------------'  `--------------------------'
@@ -57,7 +59,7 @@ _______,LALT_T(KC_BSLS),LGUI_T(KC_MINS), LCTL_T(KC_SCLN), KC_EQL, KC_PERC,    KC
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, _______, _______, LCTL_T(KC_PGUP), CTL_U, KC_HOME,          KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, RALT_T(KC_F11), _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, _______,TMUX_P_N, KC_PGDN, CTL_D, KC_END,                      _______, _______, _______, _______, KC_F12, _______,
+      _______, _______,TMUX_P_N, KC_PGDN, CTL_D, KC_END,                      TMUX_PRV, _______, _______, TMUX_NXT, KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                         _______,  _______, _______,    _______, LT(_META, KC_BSPC), _______ 
                                       //`--------------------------'  `--------------------------'
@@ -87,6 +89,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case TMUX_P_N: {
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("an") );
+      }
+      return false;
+    }
+    case TMUX_NXT: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a") "n");
+      }
+      return false;
+    }
+    case TMUX_PRV: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a") "p");
       }
       return false;
     }
