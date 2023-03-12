@@ -32,11 +32,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
        XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                      KC_H,  KC_J, KC_K, KC_L, RALT_T(KC_QUOT), XXXXXXX,
+XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                      KC_H,  KC_J, RCTL_T(KC_K), RGUI_T(KC_L), RALT_T(KC_QUOT), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_Z, LSG_T(KC_X), KC_C,    KC_V,    KC_B,                        KC_N, KC_M, KC_COMM, RSG_T(KC_DOT), KC_QUES, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-              LGUI_T(KC_ESC),  LT(_RAISE, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), RCTL_T(KC_DEL)
+              LT(_RAISE, KC_ESC),  LT(_LOWER, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), LT(_RAISE, KC_DEL)
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -49,7 +49,7 @@ _______,LALT_T(KC_SLSH),LGUI_T(KC_PAST), LCTL_T(KC_MINS), KC_EQL, KC_PERC,    KC
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                   KC_HASH, KC_COLN, KC_CIRC, RSG_T(KC_BSLS), TMUX_P, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        _______, LT(_META, KC_TAB),   _______,   _______, _______, _______ 
+                                        META, META,   _______,   _______, META, META 
                                     //`--------------------------'  `--------------------------'
   ),
 
@@ -61,7 +61,7 @@ _______,LALT_T(KC_SLSH),LGUI_T(KC_PAST), LCTL_T(KC_MINS), KC_EQL, KC_PERC,    KC
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, _______,TMUX_P_N, KC_PGDN, CTL_D, KC_END,                      TMUX_PRV, _______, _______, TMUX_NXT, KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        _______,  _______, _______,    _______, LT(_META, KC_BSPC), _______ 
+                                        META,  META, _______,    _______, META, META 
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -120,7 +120,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_1[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM combo_1[] = {KC_J, RCTL_T(KC_K), COMBO_END};
 const uint16_t PROGMEM combo_2[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_3[] = {KC_Y, KC_U, COMBO_END};
 const uint16_t PROGMEM combo_4[] = {KC_F, KC_G, COMBO_END};

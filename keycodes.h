@@ -25,4 +25,4 @@ enum crkbd_layers {
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define BASE DF(_BASE)
-#define META TG(_META)
+#define META MO(_META)
