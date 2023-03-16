@@ -32,9 +32,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
        XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                      KC_H,  KC_J, RCTL_T(KC_K), RGUI_T(KC_L), RALT_T(KC_QUOT), XXXXXXX,
+XXXXXXX, LALT_T(KC_A), LCTL_T(KC_S), LGUI_T(KC_D), LSG_T(KC_F), KC_G,                      KC_H,  RSG_T(KC_J), RGUI_T(KC_K), RCTL_T(KC_L), RALT_T(KC_QUOT), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_Z, LSG_T(KC_X), KC_C,    KC_V,    KC_B,                        KC_N, KC_M, KC_COMM, RSG_T(KC_DOT), KC_QUES, XXXXXXX,
+      XXXXXXX, KC_Z, KC_X, KC_C,    KC_V,    KC_B,                        KC_N, KC_M, KC_COMM, KC_DOT, KC_QUES, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
               LT(_RAISE, KC_ESC),  LT(_LOWER, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), LT(_RAISE, KC_DEL)
                                       //`--------------------------'  `--------------------------'
@@ -45,9 +45,9 @@ XXXXXXX, LALT_T(KC_A), LGUI_T(KC_S), LCTL_T(KC_D), KC_F, KC_G,                  
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_0,    KC_1,    KC_2,    KC_3,    KC_4,                         KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-_______,LALT_T(KC_SLSH),LGUI_T(KC_PAST), LCTL_T(KC_MINS), KC_EQL, KC_PERC,    KC_DLR, KC_SCLN, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
+_______,LALT_T(KC_SLSH),LCTL_T(KC_PAST), LGUI_T(KC_MINS), KC_EQL, KC_PERC,    KC_DLR, KC_SCLN, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                   KC_HASH, KC_COLN, KC_CIRC, RSG_T(KC_BSLS), TMUX_P, _______,
+      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                   KC_HASH, KC_COLN, KC_CIRC, KC_BSLS, TMUX_P, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                         META, META,   _______,   _______, META, META 
                                     //`--------------------------'  `--------------------------'
@@ -57,9 +57,9 @@ _______,LALT_T(KC_SLSH),LGUI_T(KC_PAST), LCTL_T(KC_MINS), KC_EQL, KC_PERC,    KC
   //,-----------o----------------------------------------.                    ,-----------------------------------------------------.
       _______,   KC_F1,   KC_F2, KC_F3,   KC_F4,   KC_F5,                     KC_F6,     KC_F7,    KC_F8,   KC_F9, KC_F10, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, _______, _______, LCTL_T(KC_PGUP), CTL_U, KC_HOME,          KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, RALT_T(KC_F11), _______,
+      _______, _______, TMUX_P_N, KC_PGUP, CTL_U, KC_HOME,                    KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_F11, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, _______,TMUX_P_N, KC_PGDN, CTL_D, KC_END,                      TMUX_PRV, _______, _______, TMUX_NXT, KC_F12, _______,
+      _______, _______,_______, KC_PGDN, CTL_D, KC_END,                      TMUX_PRV, _______, _______, TMUX_NXT, KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                         META,  META, _______,    _______, META, META 
                                       //`--------------------------'  `--------------------------'
@@ -120,11 +120,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_1[] = {KC_J, RCTL_T(KC_K), COMBO_END};
+const uint16_t PROGMEM combo_1[] = {RSG_T(KC_J), RGUI_T(KC_K), COMBO_END};
 const uint16_t PROGMEM combo_2[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_3[] = {KC_Y, KC_U, COMBO_END};
-const uint16_t PROGMEM combo_4[] = {KC_F, KC_G, COMBO_END};
-const uint16_t PROGMEM combo_5[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_4[] = {LSG_T(KC_F), KC_G, COMBO_END};
+const uint16_t PROGMEM combo_5[] = {KC_H, RSG_T(KC_J), COMBO_END};
 const uint16_t PROGMEM combo_6[] = {KC_V, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_7[] = {KC_N, KC_M, COMBO_END};
 const uint16_t PROGMEM combo_8[] = {KC_E, KC_R, COMBO_END};
