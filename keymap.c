@@ -28,15 +28,32 @@ enum custom_keycodes {
   CTL_U,
   CTL_D,
 };
+
+// Keymap aliase
+#define AL_A   LALT_T(KC_A)
+#define AL_S   LCTL_T(KC_S)
+#define AL_D   LGUI_T(KC_D)
+#define AL_F   LSG_T(KC_F)
+#define AL_QT  RALT_T(KC_QUOT)
+#define AL_L   RCTL_T(KC_L)
+#define AL_K   RGUI_T(KC_K)
+#define AL_J   RSG_T(KC_J)
+#define AL_ESC LT(_RAISE, KC_ESC)
+#define AL_TAB LT(_LOWER, KC_TAB)
+#define AL_ENT LSFT_T(KC_ENT)
+#define AL_SPC RSFT_T(KC_SPC)
+#define AL_BPC LT(_LOWER, KC_BSPC)
+#define AL_DEL LT(_RAISE, KC_DEL)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
-       XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  XXXXXXX,
+       XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-XXXXXXX, LALT_T(KC_A), LCTL_T(KC_S), LGUI_T(KC_D), LSG_T(KC_F), KC_G,                      KC_H,  RSG_T(KC_J), RGUI_T(KC_K), RCTL_T(KC_L), RALT_T(KC_QUOT), XXXXXXX,
+       XXXXXXX,    AL_A,    AL_S,    AL_D,    AL_F,   KC_G,                        KC_H,    AL_J,    AL_K,    AL_L,   AL_QT,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_Z, KC_X, KC_C,    KC_V,    KC_B,                        KC_N, KC_M, KC_COMM, KC_DOT, KC_QUES, XXXXXXX,
+       XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,                        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_QUES,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-              LT(_RAISE, KC_ESC),  LT(_LOWER, KC_TAB), LSFT_T(KC_ENT),     RSFT_T(KC_SPC), LT(_LOWER, KC_BSPC), LT(_RAISE, KC_DEL)
+                                            AL_ESC, AL_TAB,  AL_ENT,    AL_SPC,  AL_BPC,  AL_DEL 
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -45,11 +62,11 @@ XXXXXXX, LALT_T(KC_A), LCTL_T(KC_S), LGUI_T(KC_D), LSG_T(KC_F), KC_G,           
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_0,    KC_1,    KC_2,    KC_3,    KC_4,                         KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-_______,LALT_T(KC_SLSH),LCTL_T(KC_PAST), LGUI_T(KC_MINS), KC_EQL, KC_PERC,    KC_DLR, KC_SCLN, KC_EXLM, KC_PIPE, RALT_T(KC_GRV), _______,
+      _______, KC_SLSH, KC_PAST, KC_MINS,  KC_EQL, KC_PERC,                       KC_DLR, KC_SCLN, KC_EXLM, KC_PIPE,  KC_GRV, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                   KC_HASH, KC_COLN, KC_CIRC, KC_BSLS, TMUX_P, _______,
+      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                      KC_HASH, KC_COLN, KC_CIRC, KC_BSLS,  TMUX_P, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        META, META,   _______,   _______, META, META 
+                                             META,    META, _______,   _______,     META,    META 
                                     //`--------------------------'  `--------------------------'
   ),
 
@@ -61,7 +78,7 @@ _______,LALT_T(KC_SLSH),LCTL_T(KC_PAST), LGUI_T(KC_MINS), KC_EQL, KC_PERC,    KC
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, _______,_______, KC_PGDN, CTL_D, KC_END,                      TMUX_PRV, _______, _______, TMUX_NXT, KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        META,  META, _______,    _______, META, META 
+                                             META,    META, _______,   _______,     META,    META 
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -73,9 +90,30 @@ _______,LALT_T(KC_SLSH),LCTL_T(KC_PAST), LGUI_T(KC_MINS), KC_EQL, KC_PERC,    KC
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, XXXXXXX, XXXXXXX, KC_MPRV, KC_VOLD, XXXXXXX,                      XXXXXXX, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        _______, _______,   _______,   _______, _______, _______ 
+                                          _______, _______, _______,   _______,  _______, _______ 
                                       //`--------------------------'  `--------------------------'
   )
+};
+
+const uint16_t PROGMEM combo_1[] = {AL_J, AL_K, COMBO_END};
+const uint16_t PROGMEM combo_2[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_3[] = {KC_Y, KC_U, COMBO_END};
+const uint16_t PROGMEM combo_4[] = {AL_F, KC_G, COMBO_END};
+const uint16_t PROGMEM combo_5[] = {KC_H, AL_J, COMBO_END};
+const uint16_t PROGMEM combo_6[] = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM combo_7[] = {KC_N, KC_M, COMBO_END};
+const uint16_t PROGMEM combo_8[] = {KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_9[] = {KC_U, KC_I, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(combo_1, KC_ESC),
+    COMBO(combo_2, KC_LBRC),
+    COMBO(combo_3, KC_RBRC),
+    COMBO(combo_4, KC_LPRN),
+    COMBO(combo_5, KC_RPRN),
+    COMBO(combo_6, KC_LCBR),
+    COMBO(combo_7, KC_RCBR),
+    COMBO(combo_8, KC_LT),
+    COMBO(combo_9, KC_GT),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -119,27 +157,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   }
   return true;
 }
-
-const uint16_t PROGMEM combo_1[] = {RSG_T(KC_J), RGUI_T(KC_K), COMBO_END};
-const uint16_t PROGMEM combo_2[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM combo_3[] = {KC_Y, KC_U, COMBO_END};
-const uint16_t PROGMEM combo_4[] = {LSG_T(KC_F), KC_G, COMBO_END};
-const uint16_t PROGMEM combo_5[] = {KC_H, RSG_T(KC_J), COMBO_END};
-const uint16_t PROGMEM combo_6[] = {KC_V, KC_B, COMBO_END};
-const uint16_t PROGMEM combo_7[] = {KC_N, KC_M, COMBO_END};
-const uint16_t PROGMEM combo_8[] = {KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM combo_9[] = {KC_U, KC_I, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_1, KC_ESC),
-    COMBO(combo_2, KC_LBRC),
-    COMBO(combo_3, KC_RBRC),
-    COMBO(combo_4, KC_LPRN),
-    COMBO(combo_5, KC_RPRN),
-    COMBO(combo_6, KC_LCBR),
-    COMBO(combo_7, KC_RCBR),
-    COMBO(combo_8, KC_LT),
-    COMBO(combo_9, KC_GT),
-};
 
 void suspend_power_down_user(void) {
     rgb_matrix_set_suspend_state(true);
