@@ -8,7 +8,7 @@ void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
-  int brightness = 80;
+  int brightness = 90;
 
   // Keys
   int saturation = 180;
@@ -40,7 +40,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             set_board_colors(70, 180);
             break;
         case _BASE:
-            set_board_colors(100, 15);
+            set_board_colors(100, 5);
             break;
         case _RAISE:
             set_board_colors(150, 50);
