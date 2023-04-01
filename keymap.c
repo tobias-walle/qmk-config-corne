@@ -37,8 +37,8 @@ enum custom_keycodes {
 #define AL_F   LSG_T(KC_F)
 #define AL_V   RCS_T(KC_V)
 #define AL_R   LSA_T(KC_R)
-#define AL_G   LCA_T(KC_G)
-#define AL_B   MEH_T(KC_B)
+#define AL_G   LCAG_T(KC_G)
+#define AL_B   KC_B
 #define AL_T   KC_T
 // -- Right
 #define AL_QT  RALT_T(KC_QUOT)
@@ -47,8 +47,8 @@ enum custom_keycodes {
 #define AL_J   RSG_T(KC_J)
 #define AL_M   RCS_T(KC_M)
 #define AL_U   RSA_T(KC_U)
-#define AL_H   LCA_T(KC_H)
-#define AL_N   MEH_T(KC_N)
+#define AL_H   LCAG_T(KC_H)
+#define AL_N   KC_N
 #define AL_Y   KC_Y
 // -- Thumb
 #define AL_ESC LT(_RAISE, KC_ESC)
