@@ -1,11 +1,11 @@
-# qmk-keymap–corne
+# QMK config Corne
 
-My keymap for the corne keyboard.
+My config for the corne keyboard.
 
-## usage
+## Usage
 
 ```shell
 cd ~/qmk_firmware/keyboards/crkbd/keymaps
-git clone git@github.com:flobilosaurus/qmk-keymap-corne.git flobilosaurus
-qmk compile -kb crkbd/rev1 -km flobilosaurus
+git clone git@github.com:tobias-walle/qmk-config-corne.git tobias
+qmk compile -kb crkbd/rev1 -km tobias
 ```
