@@ -101,9 +101,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, XXXXXXX, XXXXXXX, KC_MPLY, KC_MUTE, XXXXXXX,                      XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, XXXXXXX, XXXXXXX, KC_MPRV, KC_VOLD, XXXXXXX,                      XXXXXXX, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      _______, XXXXXXX, XXXXXXX, KC_MPRV, KC_VOLD, XXXXXXX,                      GAMING, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
+                                      //`--------------------------'  `--------------------------'
+  ),
+  [_GAMING] = LAYOUT_split_3x6_3(
+       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      GAMING, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                           KC_LALT, KC_SPC,   KC_ENT,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -117,6 +127,7 @@ const uint16_t PROGMEM combo_6[] = {AL_V, AL_B, COMBO_END};
 const uint16_t PROGMEM combo_7[] = {AL_N, AL_M, COMBO_END};
 const uint16_t PROGMEM combo_8[] = {KC_C, AL_V, COMBO_END};
 const uint16_t PROGMEM combo_9[] = {AL_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_10[] = {KC_D, KC_F, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_1, KC_ESC),
     COMBO(combo_2, KC_LCBR),
@@ -127,6 +138,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_7, KC_RPRN),
     COMBO(combo_8, KC_LT),
     COMBO(combo_9, KC_GT),
+    COMBO(combo_10, KC_ESC),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -344,7 +356,7 @@ void render_layer_state(void) {
         0x20, 0x9d, 0x9e, 0x9f, 0x20,
         0x20, 0xbd, 0xbe, 0xbf, 0x20,
         0x20, 0xdd, 0xde, 0xdf, 0x20, 0};
-    if(layer_state_is(_META)) {
+    if(layer_state_is(_META) || layer_state_is(_GAMING)) {
         oled_write_P(meta_layer, false);
     } else if(layer_state_is(_LOWER)) {
         oled_write_P(lower_layer, false);

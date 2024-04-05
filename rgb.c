@@ -8,8 +8,8 @@ void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
-  int brightness = 110;
-  int brightness_back = 230;
+  int brightness = 90;
+  int brightness_back = 200;
 
   // Keys
   int saturation = 255;
@@ -48,6 +48,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
         case _META:
             rgb_matrix_sethsv(0, 0, 10);
+            break;
+        case _GAMING:
+            set_board_colors(200, 100);
             break;
     };
     return false;

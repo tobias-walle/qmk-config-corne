@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-#define COMBO_COUNT 9
+#define COMBO_COUNT 10
 
 #define TAPPING_TERM 170
 #define IGNORE_MOD_TAP_INTERRUPT
@@ -50,7 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
-// #   define RGB_MATRIX_KEYPRESSES // reacts to keypresses 
+// #   define RGB_MATRIX_KEYPRESSES // reacts to keypresses
 // #   define RGB_MATRIX_KEYRELEASES // reacts to keyreleases (instead of keypresses)
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when suspended
 /* #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS */

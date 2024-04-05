@@ -19,10 +19,12 @@ enum crkbd_layers {
   _BASE,
   _LOWER,
   _RAISE,
-  _META
+  _META,
+  _GAMING,
 };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define BASE DF(_BASE)
 #define META MO(_META)
+#define GAMING TG(_GAMING)
