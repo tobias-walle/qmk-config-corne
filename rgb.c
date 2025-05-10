@@ -8,7 +8,7 @@ void rgb_matrix_sethsv_at(uint8_t led, uint8_t h, uint8_t s, uint8_t v) {
 }
 
 void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
-  int brightness = 90;
+  int brightness = 0;
   int brightness_back = 200;
 
   // Keys
@@ -24,7 +24,7 @@ void set_board_colors_side(uint8_t offset, uint8_t hue, uint8_t hue_backglow) {
   // Backglow
   for(int i = 0; i < 6; i++) {
     uint8_t led = i + offset;
-    rgb_matrix_sethsv_at(led, hue_backglow, 255, brightness_back);
+    rgb_matrix_sethsv_at(led, hue_backglow, 0, brightness_back);
   }
 }
 

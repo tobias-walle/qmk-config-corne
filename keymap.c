@@ -21,15 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keycodes.h"
 
 enum custom_keycodes {
-  TMUX_P = SAFE_RANGE, // Tmux prefix
-  TMUX_P_N, // Tmux select session
-  TMUX_NXT, // Tmux next window
-  TMUX_PRV, // Tmux previous window
   CTL_U,
   CTL_D,
 };
 
 // Keymap aliase
+// -- Both
+// Hyper without Shift
+#define AL_HYPR LCTL(LALT(KC_LGUI))
 // -- Left
 #define AL_A   LALT_T(KC_A)
 #define AL_S   LCTL_T(KC_S)
@@ -60,11 +59,11 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
-       XXXXXXX,    KC_Q,    KC_W,    KC_E,    AL_R,   AL_T,                        AL_Y,    AL_U,    KC_I,    KC_O,   KC_P,   XXXXXXX,
+      KC_LGUI,    KC_Q,    KC_W,    KC_E,    AL_R,   AL_T,                         AL_Y,    AL_U,    KC_I,    KC_O,   KC_P,   KC_RGUI,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_HYPR,    AL_A,    AL_S,    AL_D,    AL_F,   AL_G,                        AL_H,    AL_J,    AL_K,    AL_L,   AL_QT,  KC_HYPR,
+       AL_HYPR,    AL_A,    AL_S,    AL_D,    AL_F,   AL_G,                        AL_H,    AL_J,    AL_K,    AL_L,   AL_QT,  AL_HYPR,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       XXXXXXX,    KC_Z,    KC_X,    KC_C,    AL_V,   AL_B,                        AL_N,    AL_M, KC_COMM,  KC_DOT, KC_QUES,  XXXXXXX,
+       KC_LALT,    KC_Z,    KC_X,    KC_C,    AL_V,   AL_B,                        AL_N,    AL_M, KC_COMM,  KC_DOT, KC_QUES,  KC_RALT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             AL_ESC, AL_TAB,  AL_ENT,     AL_SPC, AL_BPC,  AL_DEL
                                       //`--------------------------'  `--------------------------'
@@ -77,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
       _______, KC_SLSH, KC_PAST, KC_MINS,  KC_EQL, KC_PERC,                       KC_DLR, KC_SCLN, KC_EXLM, KC_PIPE,  KC_GRV, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                      KC_HASH, KC_COLN, KC_CIRC, KC_BSLS,  TMUX_P, _______,
+      _______, KC_TILD, KC_AMPR, KC_UNDS, KC_PLUS,   KC_AT,                      KC_HASH, KC_COLN, KC_CIRC, KC_BSLS, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                              META, _______, _______,    _______, _______,    META
                                     //`--------------------------'  `--------------------------'
@@ -87,9 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,   KC_F1,   KC_F2, KC_F3,   KC_F4,   KC_F5,                          KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, _______, TMUX_P_N, KC_PGUP, CTL_U, KC_HOME,                       KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F11, _______,
+      _______, _______, _______, KC_PGUP, CTL_U, KC_HOME,                        KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F11, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------+
-      _______, _______, _______,  KC_PGDN, CTL_D,  KC_END,                      TMUX_PRV,TMUX_NXT, _______, _______,  KC_F12, _______,
+      _______, _______, _______,  KC_PGDN, CTL_D,  KC_END,                       _______, _______,  KC_F12, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                              META, _______, _______,    _______, _______,    META
                                       //`--------------------------'  `--------------------------'
@@ -143,30 +142,6 @@ combo_t key_combos[COMBO_COUNT] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_P: {
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a"));
-      }
-      return false;
-    }
-    case TMUX_P_N: {
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("an") );
-      }
-      return false;
-    }
-    case TMUX_NXT: {
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") "n");
-      }
-      return false;
-    }
-    case TMUX_PRV: {
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") "p");
-      }
-      return false;
-    }
     case CTL_U: {
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("u") );
